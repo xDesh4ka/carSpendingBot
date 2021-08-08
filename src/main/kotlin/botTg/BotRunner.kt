@@ -25,7 +25,7 @@ fun main() {
     val dao = UserDao()
     var user : User? = null
     bot {
-        token = "1870033544:AAHUV4N8u4uBsvnIi1qrIM1-1re4s6UaNiU"
+        token = ""
         dispatch {
                 command("start") {
                     bot.sendMessage(chatId = ChatId.fromId(message.chat.id),
