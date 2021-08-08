@@ -25,18 +25,18 @@ fun main() {
     val dao = UserDao()
     var user : User? = null
     bot {
-        token = ""
+        token = "token"
         dispatch {
                 command("start") {
                     bot.sendMessage(chatId = ChatId.fromId(message.chat.id),
-                        text = "Привет, ${message.chat.username}!")
+                        text = "Привет, ${message.chat.username?: "Друг"}!")
                     bot.sendMessage(chatId = ChatId.fromId(message.chat.id),
                         text = "Чтобы добавить запись — напиши на что потратил и сумму, например \"бензин 500\"")
                     bot.sendMessage(chatId = ChatId.fromId(message.chat.id),
                         text = """Если хочешь узнать, сколько ты потратил денег на конкретную категорию — введи /Итого""",
                         replyMarkup = KeyboardReplyMarkup(listOf(listOf(KeyboardButton("/Итого")))))
                     if(message.chat.id !in userList) {
-                        dao.save(User(message.chat.id, message.chat.username))
+                        dao.save(User(message.chat.id, message.chat.username?: "NonNickUser"))
                         userList.add(message.chat.id)
                     }
                 }

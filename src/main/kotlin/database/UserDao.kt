@@ -77,7 +77,7 @@ class UserDao
             "insert into user (id, name) values (? , ?) "
         );
         stmt.setLong(1, user.id)
-        stmt.setString(2, user.name)
+        stmt.setString(2, user.name ?: "NonNickUser")
         stmt.executeUpdate()
         stmt.setSpend(true, user)
     }
@@ -88,7 +88,7 @@ class UserDao
         val stmt: PreparedStatement = connection.prepareStatement(
             "update user set name =? where id= ?"
         )
-        stmt.setString(1, user.name)
+        stmt.setString(1, user.name?: "NonNickUser")
         stmt.setLong(2, user.id)
         stmt.setSpend(false, user)
         stmt.executeUpdate()
